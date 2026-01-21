@@ -1,0 +1,33 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+
+      config:
+        enabled: false
+
+      discovery:
+        enabled: true
+
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/users/**
+
+        - id: order-service
+          uri: lb://order-service
+          predicates:
+            - Path=/orders/**
