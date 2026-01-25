@@ -31,3 +31,7 @@ spring:
           uri: lb://order-service
           predicates:
             - Path=/orders/**
+security:
+  jwt:
+    secret: my-gateway-secret-1234
+    expiration-ms: 3600000
